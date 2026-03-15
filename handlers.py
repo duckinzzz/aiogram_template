@@ -2,7 +2,7 @@ from aiogram import Router, types, F
 from aiogram.filters import CommandStart
 
 import keyboards as kb
-from bot_core import logger
+from core import logger
 
 start_router = Router()
 
@@ -40,11 +40,9 @@ async def process_button(callback: types.CallbackQuery):
 async def universal_handler(message: types.Message):
     user_name = get_user_name(message.from_user)
     content_type = str(message.content_type).split('.')[1]
-    text = message.text
+    text = message.text or message.caption
     logger.info(f"\nuserID: {message.from_user.id}\nusername: {user_name}\ncontent_type: {content_type}\ntext: {text}")
-    await message.answer(f"userID: `{message.from_user.id}`\n"
+    await message.answer(f"userID: {message.from_user.id}\n"
                          f"username: {user_name}\n"
-                         f"content\\_type: {content_type.replace('_', '\\_')}\n"    
-                         f"text: {text}",
-                         parse_mode="MarkdownV2"
-                         )
+                         f"content_type: {content_type}\n"
+                         f"text: {text}")

@@ -1,12 +1,11 @@
 import asyncio
-import os
 
-from bot_core import bot, dp, logger
+from core import bot, dp, logger
 from handlers import start_router
 
 
 async def announce_start():
-    logger.info(f"Bot started in {os.getenv('ENV', 'unknown')} mode")
+    logger.info("Bot started")
 
 
 async def main():
